@@ -1,0 +1,4 @@
+env/overrides.env
+data/logs
+data/mysql
+data/web

@@ -1,0 +1,15 @@
+#!/bin/bash
+# /scripts/post-install.d/10-install-core
+
+set -e
+shopt -s expand_aliases
+alias wp="wp --path=$DOCUMENT_ROOT --allow-root"
+
+echo "----> Post-Install: Wordpress Core."
+if ! $(wp core is-installed); then
+  wp core install --url="$DOMAIN" \
+                  --title="Snappic Commerce" \
+                  --admin_user=admin \
+                  --admin_password=password123 \
+                  --admin_email=admin@istrator.com
+fi

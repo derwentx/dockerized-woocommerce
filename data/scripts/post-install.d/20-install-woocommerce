@@ -1,0 +1,12 @@
+#!/bin/bash
+# /scripts/post-install.d/20-install-woocommerce
+
+set -e
+shopt -s expand_aliases
+alias wp="wp --path=$DOCUMENT_ROOT --allow-root"
+
+echo "----> Post-Install: WooCommerce Plugin."
+if ! $(wp plugin is-installed woocommerce); then
+  wp plugin install woocommerce
+  wp plugin activate woocommerce
+fi

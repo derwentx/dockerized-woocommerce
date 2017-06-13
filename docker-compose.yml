@@ -1,0 +1,22 @@
+app:
+  image: doodloo/wordpress
+  # build: docker-images/wordpress
+  ports:
+    - 80:80
+  links:
+    - mysql
+  volumes:
+    - ./data/web:/var/www/html
+    - ./data/scripts/post-install.d:/scripts/post-install.d
+  env_file:
+    - env/overrides.env
+
+mysql:
+  image: mysql:5.5
+  ports:
+    - 3306:3306
+  volumes:
+    - ./data/mysql:/var/lib/mysql
+  env_file:
+    - env/mysql.env
+    - env/overrides.env
