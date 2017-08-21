@@ -3,6 +3,7 @@ app:
   # build: docker-images/wordpress
   ports:
     - 80:80
+    - 443:443
   links:
     - mysql
   volumes:

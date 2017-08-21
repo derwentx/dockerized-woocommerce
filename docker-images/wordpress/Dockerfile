@@ -24,7 +24,7 @@ RUN set -e &&\
                          pdo pdo_mysql soap xml zip &&\
 
   echo "----> Configuring and adding customizations..." &&\
-  a2enmod rewrite &&\
+  a2enmod rewrite ssl &&\
   mkdir -p /scripts/{pre,post}-install.d &&\
   curl -L $WP_CLI_URL -o /usr/local/bin/wp &&\
   chmod +x /usr/local/bin/wp \
@@ -36,6 +36,9 @@ RUN set -e &&\
   apt-get remove --purge -y $DEV_DEPENDENCIES &&\
   apt-get autoremove -y &&\
   apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+COPY config/certs/ /etc/ssl/certs/custom/
+COPY config/default-ssl.conf /etc/apache2/sites-enabled/
 
 ENTRYPOINT ["/usr/local/bin/entrypoint"]
 CMD ["apache2-foreground"]

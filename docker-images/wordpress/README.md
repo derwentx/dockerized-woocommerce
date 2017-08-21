@@ -117,36 +117,6 @@ As an example, a post-install script could install a WordPress plugin such as Wo
 
 Note that in the example above, the `DOCUMENT_ROOT` environment variable is used to refer to the location of the WordPress installation.
 
-## Docker Compose ##
-
-A convenient way to capture the configuration of your MySQL and WordPress images is to use [Docker Compose](https://docs.docker.com/compose/).
-
-### Example ###
-
-    # docker-compose.yml
-
-    web:
-      build: tristanpenman/wordpress
-      ports:
-       - "8080:80"
-      environment:
-       - WORDPRESS_DB_NAME=wordpress
-       - WORDPRESS_DB_PASSWORD=wordpress
-       - WORDPRESS_DB_USER=wordpress
-       - WP_DEBUG=true
-       - WP_DEBUG_DISPLAY=false
-       - WP_DEBUG_LOG=true
-      links:
-       - mysql
-
-    mysql:
-      image: mysql:5.7
-      environment:
-       - MYSQL_USER=wordpress
-       - MYSQL_PASSWORD=wordpress
-       - MYSQL_ROOT_PASSWORD=root
-       - MYSQL_DATABASE=wordpress
-
 ## Supported Versions ##
 
 ### Docker ###
