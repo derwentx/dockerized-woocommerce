@@ -1,4 +1,4 @@
-FROM php:5.6-apache
+FROM php:7-apache
 MAINTAINER Pierre Martin<hickscorp@gmail.com>
 
 ENV SCRIPTS_DIR /scripts
@@ -10,17 +10,17 @@ RUN set -e &&\
   echo "----> Starting..." &&\
   WP_CLI_URL=https://github.com/wp-cli/wp-cli/releases/download/v1.2.1/wp-cli-1.2.1.phar &&\
   DEPENDENCIES="\
-    libdbd-mysql-perl libdbi-perl libicu52 libjpeg62-turbo libmcrypt4 libmysqlclient18 \
-    libpng12-0 libterm-readkey-perl mailutils mysql-client" &&\
+    libdbd-mysql-perl libdbi-perl libicu57 libjpeg62-turbo libmcrypt4 libpng16-16 \
+    libterm-readkey-perl mailutils mysql-client" &&\
   DEV_DEPENDENCIES="\
     icu-devtools libcurl4-openssl-dev libicu-dev libjpeg-dev libmcrypt-dev \
-    libpng12-dev libxml2-dev zlib1g-dev g++" &&\
+    libpng-dev libxml2-dev zlib1g-dev g++" &&\
 
   echo "----> Installing system packages..." &&\
   apt-get update && apt-get install -y $DEV_DEPENDENCIES $DEPENDENCIES &&\
 
   echo "----> Installing PHP extensions..." &&\
-  docker-php-ext-install curl gd iconv intl mbstring mcrypt mysqli opcache \
+  docker-php-ext-install curl gd iconv intl mbstring mysqli opcache \
                          pdo pdo_mysql soap xml zip &&\
 
   echo "----> Configuring and adding customizations..." &&\
